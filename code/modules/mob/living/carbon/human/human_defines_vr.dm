@@ -7,3 +7,4 @@
 	var/flapping = 0
 	var/vantag_pref = VANTAG_NONE //What's my status?
 	var/impersonate_bodytype //For impersonating a bodytype
+	var/DigestRegen = 0.1 //recovery rate from digestion when healthy

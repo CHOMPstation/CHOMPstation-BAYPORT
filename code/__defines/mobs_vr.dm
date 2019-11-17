@@ -30,6 +30,7 @@
 #define SPECIES_TESHARI			"Teshari"
 #define SPECIES_TAJARA      	"Tajara"
 #define SPECIES_HUMAN2			"Custom Human" //Placeholder name maybe. Might just go with it.
+#define SPECIES_HUMANATHI		"Humanathi"
 
 //Vision flags, for dealing with plane visibility
 #define VIS_FULLBRIGHT		1

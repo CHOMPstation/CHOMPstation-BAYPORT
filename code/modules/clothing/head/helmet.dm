@@ -118,6 +118,8 @@
 	valid_accessory_slots = null
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_HUMANATHI = 'icons/mob/species/humanathi/helmet.dmi',
 		)
 
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)

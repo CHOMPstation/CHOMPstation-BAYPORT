@@ -12,6 +12,9 @@ var/datum/robolimb/basic_robolimb
 
 
 /datum/robolimb
+	var/includes_tail			//Cyberlimbs dmi includes a tail sprite to wear.
+	//var/includes_wing			//Cyberlimbs dmi includes a wing sprite to wear.
+	//var/list/whitelisted_to	//List of ckeys that are allowed to pick this in charsetup.
 	var/company = "Unbranded"                                 // Shown when selecting the limb.
 	var/desc = "A generic unbranded robotic prosthesis."      // Seen when examining a limb.
 	var/icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi' // Icon base to draw from.

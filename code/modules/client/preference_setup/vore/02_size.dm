@@ -46,7 +46,6 @@
 	character.weight_loss		= pref.weight_loss
 	character.fuzzy				= pref.fuzzy
 	character.appearance_flags	-= pref.fuzzy*PIXEL_SCALE
-	to_chat(world,"----- COPY TO MOB CALLED ----- \n character.size_modifier: [character.size_multiplier] || pref.size_multiplier: [pref.size_multiplier]")
 	character.resize(pref.size_multiplier, TRUE)
 
 /datum/category_item/player_setup_item/vore/size/content(var/mob/user)

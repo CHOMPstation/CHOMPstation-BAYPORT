@@ -41,6 +41,20 @@
 	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()
 	if(!istype(pref.flavour_texts_robot)) pref.flavour_texts_robot = list()
 
+	//CHOMPER start
+/datum/category_item/player_setup_item/physical/flavor/copy_to_mob(var/mob/living/carbon/human/character)
+	character.flavor_texts["general"]	= pref.flavor_texts["general"]
+	character.flavor_texts["head"]		= pref.flavor_texts["head"]
+	character.flavor_texts["face"]		= pref.flavor_texts["face"]
+	character.flavor_texts["eyes"]		= pref.flavor_texts["eyes"]
+	character.flavor_texts["torso"]		= pref.flavor_texts["torso"]
+	character.flavor_texts["arms"]		= pref.flavor_texts["arms"]
+	character.flavor_texts["hands"]		= pref.flavor_texts["hands"]
+	character.flavor_texts["legs"]		= pref.flavor_texts["legs"]
+	character.flavor_texts["feet"]		= pref.flavor_texts["feet"]
+	character.ooc_notes 				= pref.metadata
+	//CHOMPER end
+
 /datum/category_item/player_setup_item/physical/flavor/content(var/mob/user)
 	. += "<b>Flavor:</b><br>"
 	. += "<a href='?src=\ref[src];flavor_text=open'>Set Flavor Text</a><br/>"

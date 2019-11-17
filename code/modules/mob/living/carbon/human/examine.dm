@@ -319,7 +319,12 @@
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
-
+	
+	// CHOMPER Start
+	if(ooc_notes)
+		msg += "<span class = 'deptradio'>OOC Notes:</span> <a href='?src=\ref[src];ooc_notes=1'>\[View\]</a>\n"
+	// CHOMPER End
+	
 	if(mind && user.mind && name == real_name)
 		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
 		if(length(relations))
@@ -337,6 +342,7 @@
 	if(show_descs)
 		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
 	to_chat(user, jointext(msg, null))
+
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

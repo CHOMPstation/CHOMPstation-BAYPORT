@@ -11,6 +11,7 @@
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
 	sprite_sheets_obj = null
+	sprite_sheets_refit = null
 	wizard_garb = 1
 
 /obj/item/clothing/suit/space/void/wizard
@@ -22,6 +23,7 @@
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
 	sprite_sheets_obj = null
+	sprite_sheets_refit = null
 	wizard_garb = 1
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL //For gloves.
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS

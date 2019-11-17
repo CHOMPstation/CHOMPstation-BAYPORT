@@ -116,6 +116,15 @@
 			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC) //skrell/humans/machines can wear each other's suits
 		else
 			species_restricted = list(target_species)
+	/*
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
+		*/
+	//CHOMPER Set icon
+	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
+		sprite_sheets[target_species] = sprite_sheets_refit[target_species]
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -499,6 +508,7 @@ BLIND     // can't see anything
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
 		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_mask_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_mask_unathi.dmi',
+		SPECIES_HUMANATHI = 'icons/mob/species/humanathi/mask.dmi'
 		)
 
 	var/voicechange = 0

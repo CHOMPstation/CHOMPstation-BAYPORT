@@ -96,11 +96,10 @@ var/const/RESIZE_A_SMALLTINY = (RESIZE_SMALL + RESIZE_TINY) / 2
 			var/image/HI = hud_list
 			HI.pixel_y = new_y_offset
 			apply_hud(index, HI)
-*/
 // Optimize mannequins - never a point to animating or doing HUDs on these.
 /mob/living/carbon/human/dummy/mannequin/resize(var/new_size, var/animate = TRUE)
 	size_multiplier = new_size
-
+*/
 /**
  * Verb proc for a command that lets players change their size OOCly.
  * Ace was here! Redid this a little so we'd use math for shrinking characters. This is the old code.

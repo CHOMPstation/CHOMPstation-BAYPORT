@@ -9,12 +9,13 @@
 /datum/sprite_accessory/facial_hair
 	icon = 'icons/mob/human_races/species/human/facial.dmi'
 	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE)
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"
 	gender = NEUTER
-	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_VOX,SPECIES_IPC)
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE,SPECIES_VOX,SPECIES_IPC)
 
 /datum/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"
@@ -55,7 +56,6 @@
 /datum/sprite_accessory/facial_hair/elvis
 	name = "Elvis Sideburns"
 	icon_state = "facial_elvis"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
 
 /datum/sprite_accessory/facial_hair/abe
 	name = "Abraham Lincoln Beard"

@@ -482,11 +482,11 @@
 			'sound/vore/death8.ogg',
 			'sound/vore/death9.ogg',
 			'sound/vore/death10.ogg')
-		playsound(hound, finisher, vol = 100, vary = 1, falloff = 0.1, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+		playsound(hound, finisher, 100, 1, 0.1, TRUE, preference = /datum/client_preference/digestion_noises)
 		to_chat(hound, "<span class='notice'>Your [src.name] is now clean. Ending self-cleaning cycle.</span>")
 		cleaning = 0
 		update_patient()
-		playsound(hound, 'sound/machines/ding.ogg', vol = 100, vary = 1, falloff = 0.1, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+		playsound(hound, 'sound/machines/ding.ogg', 100, 1, 0.1, TRUE, preference = /datum/client_preference/digestion_noises)
 		return
 
 	if(prob(20))
@@ -503,7 +503,7 @@
 			'sound/vore/digest10.ogg',
 			'sound/vore/digest11.ogg',
 			'sound/vore/digest12.ogg')
-		playsound(hound, churnsound, vol = 100, vary = 1, falloff = 0.1, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+		playsound(hound, churnsound, 100, 1, 0.1, TRUE, preference = /datum/client_preference/digestion_noises)
 	//If the timing is right, and there are items to be touched
 	if(air_master.current_cycle%3==1 && length(touchable_items))
 
@@ -548,7 +548,7 @@
 					'sound/vore/death8.ogg',
 					'sound/vore/death9.ogg',
 					'sound/vore/death10.ogg')
-				playsound(hound, deathsound, vol = 100, vary = 1, falloff = 0.1, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+				playsound(hound, deathsound, 100, 1, 0.1, TRUE, preference = /datum/client_preference/digestion_noises)
 				if(is_vore_predator(T))
 					for(var/belly in T.vore_organs)
 						var/obj/belly/B = belly

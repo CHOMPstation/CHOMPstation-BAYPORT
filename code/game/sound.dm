@@ -183,4 +183,9 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("switch") soundin = pick(GLOB.switch_sound)
 			if ("button") soundin = pick(GLOB.button_sound)
 			if ("chop") soundin = pick(GLOB.chop_sound)
+			if ("digestion") soundin = pick(GLOB.digestion_sound) //CHOMPER AUDIO
+			if ("vore_death") soundin = pick(GLOB.death_sound) //CHOMPER AUDIO
+			if ("vore_hunger") soundin = pick(GLOB.hunger_sound) //CHOMPER AUDIO
+			if ("vore_struggle") soundin = pick(GLOB.struggle_sound) //CHOMPER AUDIO
+			if ("vore_sound") soundin = pick(GLOB.vore_sounds) //CHOMPER AUDIO
 	return soundin

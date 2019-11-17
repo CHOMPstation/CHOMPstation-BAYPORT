@@ -396,6 +396,7 @@
 	if (popup)
 		memory()
 
+/* //CHOMPER using our own bodyparts flavor text system connected to character creator
 /mob/proc/update_flavor_text()
 	set src in usr
 	if(usr != src)
@@ -404,6 +405,7 @@
 
 	if(msg != null)
 		flavor_text = msg
+*/
 
 /mob/proc/warn_flavor_changed()
 	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
@@ -469,8 +471,10 @@
 	if(href_list["flavor_more"])
 		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
 		onclose(usr, "[name]")
+	/*	//CHOMPER we dont need that flavor system anymore
 	if(href_list["flavor_change"])
 		update_flavor_text()
+	*/
 
 //	..()
 	return
@@ -858,7 +862,7 @@
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
-		for(var/obj/item/organ/external/organ in organs) 
+		for(var/obj/item/organ/external/organ in organs)
 			for(var/obj/item/O in organ.implants)
 				if(O == implant)
 					affected = organ

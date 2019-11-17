@@ -8,7 +8,7 @@
 
 	var/icon_add = 'icons/mob/human_face.dmi' //Already defined in sprite_accessories.dm line 49. // NOT ANYMORE BOI-O - JON
 	var/color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //This lets all races use the default hairstyles.
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //This lets all races use the default hairstyles.
 
 	awoohair
 		name = "Shoulder-length Messy"
@@ -81,14 +81,14 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //Lets all the races be bald if they want.
+		species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_TAJARA, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //Lets all the races be bald if they want.
 
 	ponytail6_fixed //Eggnerd's done with waiting for upstream fixes lmao.
 		name = "Ponytail 6 but fixed"
 		icon = 'icons/mob/human_face_vr.dmi'
 		icon_add = 'icons/mob/human_face_vr_add.dmi'
 		icon_state = "hair_ponytail6"
-		species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_NEVREAN, SPECIES_AKULA,SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE)
+		species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_TAJARA, SPECIES_NEVREAN, SPECIES_AKULA,SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE)
 
 	una_hood
 		name = "Cobra Hood"
@@ -102,14 +102,14 @@
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_longspines"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN) //Xenochimera get most hairstyles since they're abominations.
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN) //Xenochimera get most hairstyles since they're abominations.
 
 	una_spines_short
 		name = "Short Unathi Spines"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_shortspines"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 
 	una_frills_long
@@ -117,56 +117,56 @@
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_longfrills"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_frills_short
 		name = "Short Unathi Frills"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_shortfrills"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_horns
 		name = "Unathi Horns"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_horns"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)*/
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)*/
 
 	una_bighorns
 		name = "Unathi Big Horns"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "unathi_bighorn"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_smallhorns
 		name = "Unathi Small Horns"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "unathi_smallhorn"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_ramhorns
 		name = "Unathi Ram Horns"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "unathi_ramhorn"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_sidefrills
 		name = "Unathi Side Frills"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "unathi_sidefrills"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	una_doublehorns
 		name = "Double Unathi Horns"
 		icon = 'icons/mob/human_face_m.dmi'
 		icon_add = 'icons/mob/human_face.dmi'
 		icon_state = "soghun_dubhorns"
-		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+		species_allowed = list(SPECIES_UNATHI, SPECIES_HUMANATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 
 	taj_ears
 		name = "Tajaran Ears"

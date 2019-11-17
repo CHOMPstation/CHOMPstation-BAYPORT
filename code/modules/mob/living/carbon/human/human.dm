@@ -398,6 +398,11 @@
 		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
 			show_inv(usr)
 
+	// VOREStation Start
+	if(href_list["ooc_notes"])
+		src.Examine_OOC()
+    // VOREStation End
+
 	if (href_list["criminal"])
 		if(hasHUD(usr, HUD_SECURITY))
 

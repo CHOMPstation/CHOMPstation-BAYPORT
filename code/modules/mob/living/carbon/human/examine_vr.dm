@@ -129,7 +129,7 @@
 					return TRUE
 
 	return FALSE*/
-	
+
 /mob/living/carbon/human/proc/examine_pickup_size(mob/living/H)
 	var/message = ""
 	if(istype(H) && (H.get_effective_size() - src.get_effective_size()) >= 0.50)

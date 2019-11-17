@@ -548,6 +548,8 @@
 		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
 		if(!brain || (brain.status & ORGAN_DEAD))
 			return TRUE
+	if(getDigestLoss() >= 50 && health <= 0)
+		return TRUE
 	return species.handle_death_check(src)
 
 //DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.

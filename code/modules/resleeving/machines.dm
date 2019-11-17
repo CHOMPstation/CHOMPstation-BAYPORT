@@ -88,7 +88,7 @@
 //		H.add_modifier(modifier_type) // Genetics Modifiers don't exist - Jon
 
 	//Apply damage
-	H.adjustCloneLoss((H.getMaxHealth() - config.health_threshold_dead)*0.75)
+	H.adjustCloneLoss((H.getMaxHealth() - config.health_threshold_dead)*0.5)
 	H.Paralyse(4)
 	H.updatehealth()
 
@@ -147,7 +147,7 @@
 			connected_message("Clone Rejected: Deceased.")
 			return
 
-		else if(occupant.health < heal_level && occupant.getCloneLoss() > 0)
+		else if((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) < heal_level && occupant.getCloneLoss() > 0)
 
 			 //Slowly get that clone healed and finished.
 			occupant.adjustCloneLoss(-2 * heal_rate)
@@ -156,8 +156,8 @@
 			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
 
 			//So clones don't die of oxyloss in a running pod.
-			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
-				occupant.reagents.add_reagent("inaprovaline", 60)
+			if(occupant.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 15)
+				occupant.reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 
 			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
 			occupant.adjustOxyLoss(-4)
@@ -165,7 +165,7 @@
 			use_power_oneoff(7500) //This might need tweaking.
 			return
 
-		else if(((occupant.health >= heal_level) || (occupant.health == occupant.maxHealth)) && (!eject_wait))
+		else if((((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) >= heal_level) || ((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) == occupant.maxHealth)) && (!eject_wait))
 			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 			audible_message("\The [src] signals that the growing process is complete.")
 			connected_message("Growing Process Complete.")
@@ -421,9 +421,7 @@
 
 	var/mob/living/carbon/human/occupant = null
 	var/connected = null
-
-	var/sleevecards = 2
-
+	
 /obj/machinery/transhuman/resleever/New()
 	..()
 	component_parts = list()
@@ -460,10 +458,10 @@
 	if(src.occupant)
 		if(src.occupant.stat >= DEAD)
 			health_text = "<FONT color=red>DEAD</FONT>"
-		else if(src.occupant.health < 0)
-			health_text = "<FONT color=red>[round(src.occupant.health,0.1)]</FONT>"
+		else if((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) < 0)
+			health_text = "<FONT color=red>[round((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)),0.1)]</FONT>"
 		else
-			health_text = "[round(src.occupant.health,0.1)]"
+			health_text = "[round((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)),0.1)]"
 
 		if(src.occupant.mind)
 			mind_text = "Mind present: [occupant.mind.name]"
@@ -498,26 +496,11 @@
 			qdel(G)
 			src.updateUsrDialog()
 			return //Don't call up else we'll get attack messsages
-	// Disabled because I removed sleevecard due to compile errors - Jon
-	/*if(istype(W, /obj/item/device/sleevecard))
-		var/obj/item/device/sleevecard/C = W
-		user.unEquip(C)
-		C.removePersonality()
-		qdel(C)
-		sleevecards++
-		to_chat(user,"<span class='notice'>You store \the [C] in \the [src].</span>")
-		return */
 	return ..()
 
 /obj/machinery/transhuman/resleever/proc/putmind(var/datum/transhuman/mind_record/MR, mode = 1, var/mob/living/carbon/human/override = null)
 	if((!occupant || !istype(occupant) || occupant.stat >= DEAD) && mode == 1)
 		return 0
-	/*
-	if(mode == 2 && sleevecards) //Card sleeving
-		var/obj/item/device/sleevecard/card = new /obj/item/device/sleevecard(get_turf(src))
-		card.sleeveInto(MR)
-		sleevecards--
-		return 1*/
 
 	//If we're sleeving a subtarget, briefly swap them to not need to duplicate tons of code.
 	var/mob/living/carbon/human/original_occupant

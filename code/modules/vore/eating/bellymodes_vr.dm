@@ -60,22 +60,24 @@
 
 				//Numbing flag
 				if(mode_flags & DM_FLAG_NUMBING)
-					if(H.bloodstr.get_reagent_amount("numbenzyme") < 2)
-						H.bloodstr.add_reagent("numbenzyme",4)
+					if(H.bloodstr.get_reagent_amount(/datum/reagent/numbenzyme) < 2)
+						H.bloodstr.add_reagent(/datum/reagent/numbenzyme,4)
 
 				//Stripping flag
 				if(mode_flags & DM_FLAG_STRIPPING)
-					for(var/slot in slots)
-						var/obj/item/I = H.get_equipped_item(slot = slot)
-						if(I)
-							H.unEquip(I,force = TRUE)
-							if(mode_flags & DM_FLAG_ITEMWEAK)
-								I.gurgle_contaminate(contents, cont_flavor)
-								items_preserved |= I
-							else
-								digest_item(I)
-							to_update = TRUE
-							break
+					for(var/obj/item/I in H)
+						if(istype(I,/obj/item/organ))
+							continue
+							//Don't strip organs
+
+						H.drop_from_inventory(I)
+						if(mode_flags & DM_FLAG_ITEMWEAK)
+							I.gurgle_contaminate(contents, cont_flavor)
+							items_preserved |= I
+						else
+							digest_item(I)
+						to_update = TRUE
+					break
 
 ///////////////////////////// DM_HOLD /////////////////////////////
 	if(digest_mode == DM_HOLD)
@@ -85,7 +87,7 @@
 	else if(digest_mode == DM_DIGEST)
 
 		if(prob(50)) //Was SO OFTEN. AAAA.
-			play_sound = pick(digestion_sounds)
+			play_sound = get_sfx("digestion")
 
 		for (var/target in touchable_mobs)
 			var/mob/living/M = target
@@ -112,7 +114,7 @@
 				to_chat(owner,"<span class='notice'>" + digest_alert_owner + "</span>")
 				to_chat(M,"<span class='notice'>" + digest_alert_prey + "</span>")
 
-				play_sound = pick(death_sounds)
+				play_sound = get_sfx("vore_death")
 				digestion_death(M)
 				owner.update_icons()
 				if(compensation > 0)
@@ -130,6 +132,7 @@
 			var/old_burn = M.getFireLoss()
 			M.adjustBruteLoss(digest_brute)
 			M.adjustFireLoss(digest_burn)
+			M.adjustDigestLoss(digest_dmg)
 			var/actual_brute = M.getBruteLoss() - old_brute
 			var/actual_burn = M.getFireLoss() - old_burn
 			var/damage_gain = actual_brute + actual_burn
@@ -160,7 +163,7 @@
 		for (var/target in touchable_mobs)
 			var/mob/living/carbon/M = target
 			if(prob(10)) //Less often than gurgles. People might leave this on forever.
-				play_sound = pick(digestion_sounds)
+				play_sound = get_sfx("digestion")
 
 			if(M.absorbed)
 				continue
@@ -207,7 +210,7 @@
 			var/mob/living/M = target
 
 			if(prob(10)) //Less often than gurgles. People might leave this on forever.
-				play_sound = pick(digestion_sounds)
+				play_sound = get_sfx("digestion")
 
 			if(M.nutrition >= 100) //Drain them until there's no nutrients left.
 				var/oldnutrition = (M.nutrition * 0.05)
@@ -226,7 +229,7 @@
 			var/mob/living/M = target
 
 			if(prob(10)) //Infinite gurgles!
-				play_sound = pick(digestion_sounds)
+				play_sound = get_sfx("digestion")
 
 			if(M.size_multiplier > shrink_grow_size) //Shrink until smol.
 				M.resize(M.size_multiplier-0.01) //Shrink by 1% per tick.
@@ -248,7 +251,7 @@
 			var/mob/living/M = target
 
 			if(prob(10))
-				play_sound = pick(digestion_sounds)
+				play_sound = get_sfx("digestion")
 
 			if(M.size_multiplier < shrink_grow_size) //Grow until large.
 				M.resize(M.size_multiplier+0.01) //Grow by 1% per tick.
@@ -267,7 +270,7 @@
 			var/mob/living/M = target
 
 			if(prob(10))
-				play_sound = pick(digestion_sounds)
+				play_sound = get_sfx("digestion")
 
 			if(M.size_multiplier > shrink_grow_size && owner.size_multiplier < 2) //Grow until either pred is large or prey is small.
 				owner.resize(owner.size_multiplier+0.01) //Grow by 1% per tick.
@@ -284,12 +287,12 @@
 
 
 //**********************I also didn't know you can give Nutrition like this. Holy heck. We can explain how things work in our wiki after fixing the nutrition var and none will be the wiser************
-
+// CHOMPER Buffed healing to make it more viable
 
 	else if(digest_mode == DM_HEAL)
 
 		if(prob(50)) //Wet heals! The secret is you can leave this on for gurgle noises for fun.
-			play_sound = pick(digestion_sounds)
+			play_sound = get_sfx("digestion")
 
 		for (var/target in touchable_mobs)
 			var/mob/living/M = target
@@ -298,8 +301,9 @@
 				continue
 
 			if(owner.nutrition > 90 && (M.health < M.maxHealth))
-				M.adjustBruteLoss(-5)
-				M.adjustFireLoss(-5)
+				M.adjustBruteLoss(-10)
+				M.adjustFireLoss(-10)
+				M.adjustDigestLoss(-2.5)
 				owner.nutrition -= 2
 				if(M.nutrition <= 400)
 					M.nutrition += 1
@@ -316,7 +320,7 @@
 
 /////////////////////////// Make any noise ///////////////////////////
 	if(play_sound)
-		playsound(src, play_sound, vol = 100, vary = 1, falloff = VORE_SOUND_FALLOFF, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+		vr_playsound(src, play_sound, vol = 100, vary = 1, falloff = VORE_SOUND_FALLOFF, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
 	if(to_update)
 		for(var/mob/living/M in contents)
 			if(M.client)

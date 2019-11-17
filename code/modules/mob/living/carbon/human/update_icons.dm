@@ -137,9 +137,11 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_HANDCUFF_LAYER   23
 #define HO_L_HAND_LAYER     24
 #define HO_R_HAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define SHADOW_LAYER        27
-#define TOTAL_LAYERS        27
+#define HO_WING_LAYER		26	//Simply move this up a number if things are added.
+#define TAIL_LAYER_ALT		27	//Simply move this up a number if things are added.
+#define SHADOW_LAYER        28
+#define HO_FIRE_LAYER       29 //If you're on fire
+#define TOTAL_LAYERS        29
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -387,8 +389,9 @@ var/global/list/damage_icon_parts = list()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	//tail
+	//tail and wings
 	update_tail_showing(0)
+	update_wing_showing(0)
 
 	if(update_icons)
 		queue_icon_update()
@@ -633,9 +636,11 @@ var/global/list/damage_icon_parts = list()
 	if(wear_suit)
 		overlays_standing[HO_SUIT_LAYER]	= wear_suit.get_mob_overlay(src,slot_wear_suit_str)
 		update_tail_showing(0)
+		update_wing_showing(0)
 	else
 		overlays_standing[HO_SUIT_LAYER]	= null
 		update_tail_showing(0)
+		update_wing_showing(0)
 		update_inv_w_uniform(0)
 		update_inv_shoes(0)
 		update_inv_gloves(0)
@@ -718,6 +723,12 @@ var/global/list/damage_icon_parts = list()
 		var/icon/tail_s = get_tail_icon()
 		overlays_standing[HO_TAIL_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
 		animate_tail_reset(0)
+	var/image/vr_tail_image = get_tail_image()
+
+	if(vr_tail_image)
+		vr_tail_image.layer = HO_TAIL_LAYER
+		overlays_standing[HO_TAIL_LAYER] = vr_tail_image
+		return
 
 	if(update_icons)
 		queue_icon_update()
@@ -740,6 +751,7 @@ var/global/list/damage_icon_parts = list()
 		tail_icon_cache[icon_key] = tail_icon
 
 	return tail_icon
+
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
@@ -793,6 +805,20 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
 	set_tail_state("[species.get_tail(src)]_static")
 
+	if(update_icons)
+		queue_icon_update()
+
+/mob/living/carbon/human/proc/update_wing_showing(var/update_icons=1)
+	if(QDESTROYING(src))
+		return
+
+	overlays_standing[HO_WING_LAYER] = null
+
+	var/image/vr_wing_image = get_wing_image()
+	if(vr_wing_image)
+		vr_wing_image.layer = HO_WING_LAYER
+		overlays_standing[HO_WING_LAYER] = vr_wing_image
+		return
 	if(update_icons)
 		queue_icon_update()
 
@@ -867,6 +893,7 @@ var/global/list/damage_icon_parts = list()
 #undef HO_EARS_LAYER
 #undef HO_SUIT_LAYER
 #undef HO_TAIL_LAYER
+#undef HO_WING_LAYER
 #undef HO_GLASSES_LAYER
 #undef HO_BELT_LAYER_ALT
 #undef HO_SUIT_STORE_LAYER

@@ -22,6 +22,7 @@
 	var/force = 0
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
+	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -481,7 +482,7 @@ var/list/global/slot_flags_enumeration = list(
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
-	if(attacker)	
+	if(attacker)
 		parry_chance = max(0, parry_chance - 10 * attacker.get_skill_difference(SKILL_COMBAT, user))
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))

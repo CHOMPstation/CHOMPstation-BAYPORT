@@ -1,5 +1,12 @@
 /obj/item/clothing
 	var/recent_struggle = 0
+	/*
+		Sprites used when the clothing item is refit. This is done by setting icon_override.
+		For best results, if this is set then sprite_sheets should be null and vice versa, but that is by no means necessary.
+		Ideally, sprite_sheets_refit should be used for "hard" clothing items that can't change shape very well to fit the wearer (e.g. helmets, hardsuits),
+		while sprite_sheets should be used for "flexible" clothing items that do not need to be refitted (e.g. aliens wearing jumpsuits).
+	*/
+	var/list/sprite_sheets_refit = null
 
 /obj/item/clothing/shoes
 	var/list/inside_emotes = list()
@@ -88,8 +95,8 @@
 	// TO DO - UPDATE PREFIXES TO THE BAYVERSION. THIS SHIT SCUFFED - Jon
 		SPECIES_TESHARI		= 'icons/mob/species/seromi/masks_vr.dmi',
 		SPECIES_VOX 		= 'icons/mob/species/vox/masks.dmi',
-		SPECIES_TAJ 		= 'icons/mob/species/tajaran/mask_vr.dmi',
-		SPECIES_UNATHI 		= 'icons/mob/species/unathi/mask_vr.dmi',
+		SPECIES_TAJARA 		= 'icons/mob/species/tajaran/mask_vr.dmi',
+		SPECIES_HUMANATHI	= 'icons/mob/species/unathi/mask_vr.dmi',
 		SPECIES_SERGAL 		= 'icons/mob/species/sergal/mask_vr.dmi',
 		SPECIES_NEVREAN 	= 'icons/mob/species/nevrean/mask_vr.dmi',
 		SPECIES_ZORREN_HIGH	= 'icons/mob/species/fox/mask_vr.dmi',

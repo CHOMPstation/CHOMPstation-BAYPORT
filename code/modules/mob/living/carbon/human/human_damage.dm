@@ -8,6 +8,30 @@
 
 	health = maxHealth - (getBrainLoss() + getDigestLoss()) //CHopmpstation ADD: Adds digestion as a health-affected damage type.
 
+	if(getDigestLoss() > 0 && getBruteLoss() + getFireLoss() <= 30 && stat != DEAD)
+		adjustDigestLoss(-DigestRegen)
+
+	if(stat != DEAD && getDigestLoss() > 5)
+		// Custom message!
+		var/painmessage = "If you see this, something is wrong"
+		if(prob(5))
+			switch(getDigestLoss())
+				if(5 to 50)
+					painmessage = "Your body itches and stings."
+				if(51 to 100)
+					painmessage = "Your body feels like its burning inside and out!"
+				if(101 to 170)
+					painmessage = "You're mostly dissolved, why does it still burn!"
+				if(171 to INFINITY)
+					painmessage = "Youre barely yourself anymore, its hard staying awake..."
+					Paralyse(10)
+
+			custom_pain(painmessage,getDigestLoss()/4)
+
+		else if(prob(10 + getDigestLoss()/5))
+			flash_pain()
+
+
 	//TODO: fix husking
 	if(((maxHealth - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
@@ -238,6 +262,8 @@
 		return(getBruteLoss() < species.total_health / 2)
 	else if(dam_type == BURN)
 		return(getFireLoss() < species.total_health / 2)
+	else if(dam_type == DIGEST)
+		return(getDigestLoss() < species.total_health / 2)
 	return FALSE
 
 ////////////////////////////////////////////

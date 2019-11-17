@@ -11,13 +11,18 @@
 
 	//Species-specific stuff.
 	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
-	sprite_sheets = list(
+	sprite_sheets_refit = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_HUMANATHI = 'icons/mob/species/humanathi/helmet.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/obj_head_unathi.dmi',
+		SPECIES_HUMANATHI = 'icons/obj/clothing/species/humanathi/hats.dmi',
+		SPECIES_TAJARA = 'icons/obj/clothing/species/tajaran/hats.dmi',															  
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/obj_head_skrell.dmi',
+		SPECIES_TESHARI = 'icons/obj/clothing/species/seromi/hats.dmi'																
 		)
 
 	light_overlay = "helmet_light"
@@ -35,13 +40,18 @@
 	siemens_coefficient = 0.4
 
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
-	sprite_sheets = list(
+	sprite_sheets_refit = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
+		SPECIES_HUMANATHI = 'icons/mob/species/humanathi/suit.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_suit_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/obj_suit_unathi.dmi',
+		SPECIES_HUMANATHI = 'icons/obj/clothing/species/humanathi/suits.dmi',
+		SPECIES_TAJ = 'icons/obj/clothing/species/tajaran/suits.dmi',
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/obj_suit_skrell.dmi',
+		SPECIES_TESHARI = 'icons/obj/clothing/species/seromi/suits.dmi'
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
@@ -124,7 +134,15 @@ else if(##equipment_var) {\
 		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
 			to_chat(M, "The valve on your suit's installed tank safely engages.")
 			tank.canremove = 0
-
+	
+	/* //CHOMPER Disabled until we determine synths functionality on bay
+	if(cooler)
+		if(H.s_store) //Ditto
+			M << "Alarmingly, the cooling unit installed into your suit fails to deploy."
+		else if (H.equip_to_slot_if_possible(cooler, slot_s_store))
+			M << "Your suit's cooling unit deploys."
+			cooler.canremove = 0
+	*/
 
 /obj/item/clothing/suit/space/void/dropped()
 	..()
@@ -144,11 +162,16 @@ else if(##equipment_var) {\
 		if(istype(H))
 			if(boots && H.shoes == boots)
 				H.drop_from_inventory(boots, src)
-
+	/* //CHOMPER Disabled for now
 	if(tank)
 		tank.canremove = 1
 		tank.forceMove(src)
 
+	if(cooler)
+		cooler.canremove = 1
+		cooler.forceMove(src)
+	*/
+	
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
 	set name = "Toggle Helmet"
@@ -201,6 +224,15 @@ else if(##equipment_var) {\
 	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
+	/* //CHOMPER Disabled for now
+	var/obj/item/removing = null
+	if(tank)
+		removing = tank
+		tank = null
+	else
+		removing = cooler
+		cooler = null		 
+	*/
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
 	tank.canremove = 1
 	H.drop_from_inventory(tank)
@@ -226,6 +258,14 @@ else if(##equipment_var) {\
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
 				tank.dropInto(loc)
 				src.tank = null
+			/* //CHOMPER Disabled for now
+			else if(choice == cooler)
+				user << "You pop \the [cooler] out of \the [src]'s storage compartment."
+				cooler.forceMove(get_turf(src))
+				playsound(src, W.usesound, 50, 1)
+				src.cooler = null	
+			*/
+				
 			else if(choice == helmet)
 				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
 				helmet.dropInto(loc)
@@ -266,6 +306,19 @@ else if(##equipment_var) {\
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W
 		return
+	/* //CHOMPER Disabled for now
+	else if(istype(W,/obj/item/device/suit_cooling_unit))
+		if(cooler)
+			user << "\The [src] already has a suit cooling unit installed."
+		else if(tank)
+			user << "\The [src]'s airtank is in the way.  Remove it first."
+		else
+			user << "You insert \the [W] into \the [src]'s storage compartment."
+			user.drop_item()
+			W.forceMove(src)
+			cooler = W
+		return				   
+	*/																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														  
 
 	..()
 

@@ -396,6 +396,12 @@
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
 
+	//keeping here for now to remember
+	/*
+	var/cloninginitialdamage = (H.getMaxHealth() - config.health_threshold_dead)*0.5
+	var/clonningcurrentdamage = 100-(H.getCloneLoss()/H.cloninginitialdamage*100)
+	*/
+
 /obj/machinery/clonepod/New()
 	..()
 	component_parts = list()
@@ -419,7 +425,7 @@
 	if((isnull(occupant)) || (stat & NOPOWER))
 		return
 	if((!isnull(occupant)) && (occupant.stat != 2))
-		var/completion = (100 * ((occupant.health + 50) / (heal_level + 100))) // Clones start at -150 health
+		var/completion = (100 * ((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) / (heal_level + 100))) // Clones start at -150 health
 		user << "Current clone cycle is [round(completion)]% complete."
 	return
 
@@ -555,7 +561,7 @@
 //			connected_message("Clone Rejected: Deceased.")
 //			return
 
-		if(occupant.health < heal_level && occupant.getCloneLoss() > 0)
+		if((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) < heal_level && occupant.getCloneLoss() > 0)
 			occupant.Paralyse(4)
 
 			 //Slowly get that clone healed and finished.
@@ -565,8 +571,8 @@
 			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
 
 			//So clones don't die of oxyloss in a running pod.
-			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
-				occupant.reagents.add_reagent("inaprovaline", 60)
+			if(occupant.reagents.get_reagent_amount("inaprovaline") < 15)
+				occupant.reagents.add_reagent("inaprovaline", 30)
 			occupant.Sleeping(30)
 			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
 			occupant.adjustOxyLoss(-4)
@@ -574,7 +580,7 @@
 			use_power_oneoff(7500) //This might need tweaking.
 			return
 
-		else if((occupant.health >= heal_level || occupant.health == occupant.getMaxHealth()) && (!eject_wait))
+		else if(((100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) >= heal_level || (100-(occupant.getCloneLoss()/((occupant.getMaxHealth() - config.health_threshold_dead)*0.5)*100)) == occupant.getMaxHealth()) && (!eject_wait))
 			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 			audible_message("\The [src] signals that the cloning process is complete.")
 			connected_message("Cloning Process Complete.")

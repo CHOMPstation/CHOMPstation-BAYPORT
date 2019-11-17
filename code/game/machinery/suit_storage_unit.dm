@@ -672,7 +672,7 @@
 	)
 
 	//Species that the suits can be configured to fit.
-	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_HUMANATHI,SPECIES_TAJARA, SPECIES_TESHARI, "Nevrean", "Akula", "Sergal", "Flatland Zorren", "Highlander Zorren", "Vulpkanin", "Promethean", "Xenomorph Hybrid", "Xenochimera","Vasilissan", "Rapala") //CHOMPER EDIT
 
 	var/decl/item_modifier/target_modification
 	var/target_species
@@ -874,6 +874,7 @@
 
 	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
 	available_modifications |= additional_modifications
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_HUMANATHI,SPECIES_TAJARA, SPECIES_TESHARI, "Nevrean", "Akula", "Sergal", "Flatland Zorren", "Highlander Zorren", "Vulpkanin", "Promethean", "Xenomorph Hybrid", "Vasilissan", "Rapala") //VORESTATION EDIT
 
 	emagged = 1
 	safeties = 0

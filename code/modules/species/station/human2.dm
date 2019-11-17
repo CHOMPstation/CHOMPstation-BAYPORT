@@ -9,7 +9,7 @@
 	tail_blend = ICON_MULTIPLY
 	hidden_from_codex = TRUE
 
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_ICONBASE //Used only for custom species. Should not be selectable as a race by itself
+	spawn_flags = SPECIES_IS_RESTRICTED //Used only for custom species. Should not be selectable as a race by itself
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 

@@ -909,3 +909,4 @@
 	if(do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
+

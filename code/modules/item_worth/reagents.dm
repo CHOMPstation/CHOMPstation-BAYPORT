@@ -604,3 +604,6 @@
 
 /datum/reagent/xenomicrobes
 	value = 5
+	
+/datum/reagent/mylozine
+	value = 6

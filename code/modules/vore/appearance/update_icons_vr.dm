@@ -1,3 +1,11 @@
+/* //Backup of layers for chompers, in case update.icons.dm gets updated
+//Human Overlays Indexes Chomper/////////
+#define HO_WING_LAYER		26	//Simply move this up a number if things are added.
+#define TAIL_LAYER_ALT		27	//Simply move this up a number if things are added.
+#define SHADOW_LAYER        28
+#define TOTAL_LAYERS        29	//KEEP THIS UPDATED CHECK UPDATE_ICONS.DM
+//////////////////////////////////
+*/
 var/global/list/wing_icon_cache = list()
 
 /mob/living/carbon/human/proc/get_ears_overlay()
@@ -16,17 +24,17 @@ var/global/list/wing_icon_cache = list()
 
 /mob/living/carbon/human/proc/get_tail_image()
 
-/*
+
 	//If you are FBP with tail style and didn't set a custom one
 	var/datum/robolimb/model = isSynthetic()
 	var/obj/item/organ/external/T = organs_by_name[BP_CHEST]
 	if(T && BP_IS_ROBOTIC(T))
 		var/datum/robolimb/R = all_robolimbs[T.model]
-	if(istype(model) && model.includes_tail && !tail_style)
-		var/icon/tail_s = new/icon("icon" = synthetic.icon, "icon_state" = "tail")
-		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
-		return image(tail_s)
-*/
+		if(istype(model) && model.includes_tail && !tail_style)
+			var/icon/tail_s = new/icon("icon" = R.icon, "icon_state" = "tail")
+			tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.tail_blend ? ICON_MULTIPLY : ICON_ADD)
+			return image(tail_s)
+
 	//If you have a custom tail selected
 	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL && !isTaurTail(tail_style)))
 		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = wagging && tail_style.ani_state ? tail_style.ani_state : tail_style.icon_state)
@@ -48,6 +56,25 @@ var/global/list/wing_icon_cache = list()
 			return image(tail_s, "pixel_x" = -16)
 		else
 			return image(tail_s)
+
+	//If you have a custom tail selected
+	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.ani_state ? tail_style.ani_state : tail_style.icon_state)
+		if(tail_style.do_colouration)
+			tail_s.Blend(rgb(src.r_tail, src.g_tail, src.b_tail), tail_style.color_blend_mode)
+		if(tail_style.extra_overlay)
+			var/icon/overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay)
+			if(tail_style.ani_state)
+				overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay_w)
+				overlay.Blend(rgb(src.r_tail2, src.g_tail2, src.b_tail2), tail_style.color_blend_mode)
+				tail_s.Blend(overlay, ICON_OVERLAY)
+				qdel(overlay)
+			else
+				overlay.Blend(rgb(src.r_tail2, src.g_tail2, src.b_tail2), tail_style.color_blend_mode)
+				tail_s.Blend(overlay, ICON_OVERLAY)
+				qdel(overlay)
+
+		return image(tail_s)
 	return null
 
 /mob/living/carbon/human/proc/get_wing_image()

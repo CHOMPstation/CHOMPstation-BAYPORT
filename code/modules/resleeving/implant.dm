@@ -28,7 +28,6 @@
 	return ..()
 
 /obj/item/weapon/implant/backup/implanted(var/mob/living/carbon/human/H)
-	..()
 	if(istype(H))
 		var/obj/item/weapon/implant/backup/other_imp = locate(/obj/item/weapon/implant/backup,H)
 		if(other_imp && other_imp.imp_in == H)

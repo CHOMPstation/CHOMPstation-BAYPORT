@@ -11,11 +11,13 @@
 	assisted_langs = list(LANGUAGE_NABBER)
 	min_age = 17
 	max_age = 100
+	limb_blend = ICON_MULTIPLY
+	tail_blend = ICON_MULTIPLY
 	hidden_from_codex = FALSE
 	bandages_icon = 'icons/mob/bandage.dmi'
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	sexybits_location = BP_GROIN
 

@@ -41,23 +41,13 @@
 	ckey = ckey(mind.key)
 
 	cryo_at = 0
-/*
+
 	//Mental stuff the game doesn't keep mentally
-	if(istype(M) || istype(M,/mob/living/carbon/brain/caught_soul))
+	if(istype(M))
 		id_gender = M.gender
 		languages = M.languages.Copy()
 		mind_oocnotes = M.ooc_notes
-		if(M.nif)
-			nif_path = M.nif.type
-			nif_durability = M.nif.durability
-			var/list/nifsofts = list()
-			for(var/N in M.nif.nifsofts)
-				if(N)
-					var/datum/nifsoft/nifsoft = N
-					nifsofts += nifsoft.type
-			nif_software = nifsofts
-			nif_savedata = M.nif.save_data.Copy()
-*/
+
 	last_update = world.time
 
 	if(add_to_db)
